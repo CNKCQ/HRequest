@@ -22,13 +22,13 @@ public enum HTTPMethod: String {
 }
 
 class HRequest {
-    let `default` = HRequest()
+    
+    static let `default` = HRequest()
     
     func request(_ uri: String, _ method: HTTPMethod = .get ) {
         guard let url = URL(string: uri) else {
             fatalError("an error ocured")
         }
-        
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         //        DispatchQueue(label: "request").async {
@@ -44,4 +44,8 @@ class HRequest {
         print(task)
         //        }
     }
+}
+
+struct Response {
+    var value: Any?
 }

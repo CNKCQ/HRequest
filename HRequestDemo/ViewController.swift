@@ -19,6 +19,8 @@ class ViewController: UIViewController {
     
     func test() {
         let uri = "http://www.oschina.net/action/apiv2/news"
+       
+        HRequest.default.request(uri)
         
     }
     
