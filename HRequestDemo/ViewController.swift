@@ -20,7 +20,13 @@ class ViewController: UIViewController {
     func test() {
         let uri = "http://www.oschina.net/action/apiv2/news"
        
-        HRequest.default.request(uri)
+        HRequest.default.request(uri) { data, response, error in
+            guard let data = data else {
+                fatalError()
+            }
+            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            print(json, "🌹")
+        }
         
     }
     

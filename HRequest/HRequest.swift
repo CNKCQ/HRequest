@@ -25,24 +25,16 @@ class HRequest {
     
     static let `default` = HRequest()
     
-    func request(_ uri: String, _ method: HTTPMethod = .get ) {
+    func request(_ uri: String, _ method: HTTPMethod = .get, completed: @escaping (Data?, URLResponse?, Error?) -> ()) {
         guard let url = URL(string: uri) else {
             fatalError("an error ocured")
         }
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        //        DispatchQueue(label: "request").async {
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print("data is nil")
-                return
-            }
-            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            print(json, "🌹")
+                completed(data, response, error)
         }
         task.resume()
-        print(task)
-        //        }
     }
 }
 
