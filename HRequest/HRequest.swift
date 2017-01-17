@@ -30,6 +30,7 @@ class HRequest {
             fatalError("an error ocured")
         }
         var request = URLRequest(url: url)
+        request.cachePolicy = .returnCacheDataDontLoad // 离线缓存
         request.httpMethod = method.rawValue
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 completed(data, response, error)
